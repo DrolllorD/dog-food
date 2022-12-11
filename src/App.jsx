@@ -1,12 +1,25 @@
 import React from "react";
+import "./style.css";
+
+import Header from "./components/Header/header";
+import Footer from "./components/Footer/footer";
+import Card from "./components/Card";
+
+const smiles = ["^_^", "=)", "O_o", ";(", "^_0", "@_@", "-_-"];
 
 const App = () => {
     return <div className="container">
-        <header></header>
+        <Header/>
         <main>
             <h1>Главная страница</h1>
+            <div className="cards">
+                {/* {smiles} */}
+                {/* {smiles.map((el,i) => <span key={i}>{el}</span>)} */}
+                {smiles.map((el, i) => <Card key={"card_" + i} text={el} like={(i + 1) % 2 === 0} />)}
+            </div>
         </main>
-        <footer></footer>
+        <Footer/>
     </div>
 }
+
 export default App;
