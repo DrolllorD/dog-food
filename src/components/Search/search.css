@@ -1,26 +1,20 @@
 .search-block{
-    min-width: 300px;
-    width: max-content;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
+    height: 3em;
+    border-radius: 1.5em;
+    background-color: #fff;
+    padding: 0 20px;
 }
-.search-block>input{
-    flex: 1;
-    height: 30px;
-    box-sizing: border-box;
-    padding: 6px 12px;
-    border-radius: 10px;
-    border: 1px solid silver;
-    font-size: 16px;
-    outline: none;
-}
-.search-block>input:focus{
-    border-color: rgb(243,231,5);
+.search-block input{
+    border: none;
+    padding: 0;
 }
 .search-block>button{
     position: absolute;
-    right: 0;
+    right: 20px;
     background-color: transparent;
     border: none;
     height: 20px;
@@ -30,12 +24,9 @@
     fill: silver;
     cursor: pointer;
 }
-.search-block svg:hover{
-    fill: rgb(243,231,5);
-}
 .search-result{
     position: absolute;
-    top: 36px;
+    top: 60px;
     left: 12px;
     font-size: 12px;
 }

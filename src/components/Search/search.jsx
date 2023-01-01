@@ -18,11 +18,11 @@ export default ({data}) => {
         console.log(arr);
     }
     return <div className="search-block">
-        <input placeholder="Поиск..." value={text} onChange={search} />
+        <input placeholder="Поиск" value={text} onChange={search} />
         <button>{text ? <CloseImg onClick={clearSearch} /> : <SearchImg/>}</button>
         {text && <div className="search-result">
             По запросу <b>{text}</b>&nbsp;
-            {searchData.length > 0 ? `найдено ${searchData.length} продукт` : "не найдено ни одного продукт"}
+            {searchData.length > 0 ? `найдено ${searchData.length} продукт` : "не найдено ни одного продукта"}
         </div>}
     </div>
 }

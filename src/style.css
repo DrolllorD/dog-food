@@ -9,18 +9,45 @@ a{
 .container{
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 100px auto 50px;
+    grid-template-rows: 700px auto 200px;
 }
-.container>*{
-    padding: 0 calc(50% - 600px);
+header{
+    padding: 0 20px;
+}
+main, footer{
+    padding: 0 calc(50% - 500px);
+}
+main{
+    position: relative;
+    top: -550px;
+}
+.main__header{
+    width: 450px;
+}
+.main__header h1{
+    font-size: 3em;
+    font-weight: 900;
+    line-height: 1.2em;
+}
+.main__header p{
+    font-size: 1.5em;
+}
+.main__header button{
+    font-size: 1.2em;
+    font-weight: 900;
+    border: none;
+    padding: 18px 25px;
+    border-radius: 30px;
+    margin: 20px 0 100px 0;
 }
 .cards {
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 2em;
 }
+
 @media (max-width: 1260px){
-    .container>*{
+    main, footer{
         padding: 0 30px;
     }
     .cards {

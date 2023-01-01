@@ -1,9 +1,12 @@
 header {
-    background-color: rgb(243, 231, 5);
+    background-color: rgb(255, 228, 77);
+}
+.header__content{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 100px;
+    height: 150px;
 }
 .logo {
     font-size: 1.5em;
@@ -19,5 +22,5 @@ header {
 }
 .menu {
     display: flex;
-    gap: 1em;
+    gap: 1.5em;
 }
