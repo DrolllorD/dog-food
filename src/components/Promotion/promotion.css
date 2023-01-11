@@ -1,11 +1,11 @@
 .promotion {
     width: 100%;
     border-radius: 30px;
-    background-image: url(./img/1.jpg);
+    background-image: url(https://celes.club/uploads/posts/2022-05/thumbs/1653427703_52-celes-club-p-oranzhevii-fon-dlya-prevyu-krasivie-54.jpg);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 50px;
+    margin: 25px 0;
     border: 3px solid;
 }
 .promotion__text {
@@ -13,7 +13,7 @@
     border-radius: 30px;
     color: #15c;
     text-shadow: 2px 2px 0 black;
-    font-size: 2.0em;
+    font-size: 2em;
     margin: 0 20px;
 }
 .promotion__pic img{

@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.37fe43f5.css",
-    "main.js": "/static/js/main.6a3ba4a0.js",
-    "static/media/1.jpg": "/static/media/1.4cad7a03374de82561bd.jpg",
-    "static/media/logo.svg": "/static/media/logo.451d3e7a122ed0d35f9fbc7c206aeef3.svg",
-    "static/media/ic-profile.svg": "/static/media/ic-profile.88459b659812d74c083cb437414a35d1.svg",
-    "static/media/ic-favorites.svg": "/static/media/ic-favorites.5a9a0c27299e569cdb802c39cbc88f27.svg",
-    "index.html": "/index.html",
-    "static/media/circle-xmark-regular.svg": "/static/media/circle-xmark-regular.8ef6e0a127f37e5c70a1e4bb4cb92f32.svg",
-    "static/media/ic-cart.svg": "/static/media/ic-cart.36351405bb13de945ab1f9699d66d925.svg",
-    "static/media/magnifying-glass-solid.svg": "/static/media/magnifying-glass-solid.06e310dbfbf3ab21da478aef6c037c14.svg",
-    "main.37fe43f5.css.map": "/static/css/main.37fe43f5.css.map",
-    "main.6a3ba4a0.js.map": "/static/js/main.6a3ba4a0.js.map"
+    "main.css": "./static/css/main.d7ee8a84.css",
+    "main.js": "./static/js/main.25ce1a2f.js",
+    "static/media/logo.svg": "./static/media/logo.451d3e7a122ed0d35f9fbc7c206aeef3.svg",
+    "static/media/ic-profile.svg": "./static/media/ic-profile.88459b659812d74c083cb437414a35d1.svg",
+    "static/media/ic-favorites.svg": "./static/media/ic-favorites.5a9a0c27299e569cdb802c39cbc88f27.svg",
+    "index.html": "./index.html",
+    "static/media/circle-xmark-regular.svg": "./static/media/circle-xmark-regular.8ef6e0a127f37e5c70a1e4bb4cb92f32.svg",
+    "static/media/ic-cart.svg": "./static/media/ic-cart.36351405bb13de945ab1f9699d66d925.svg",
+    "static/media/magnifying-glass-solid.svg": "./static/media/magnifying-glass-solid.06e310dbfbf3ab21da478aef6c037c14.svg",
+    "main.d7ee8a84.css.map": "./static/css/main.d7ee8a84.css.map",
+    "main.25ce1a2f.js.map": "./static/js/main.25ce1a2f.js.map"
   },
   "entrypoints": [
-    "static/css/main.37fe43f5.css",
-    "static/js/main.6a3ba4a0.js"
+    "static/css/main.d7ee8a84.css",
+    "static/js/main.25ce1a2f.js"
   ]
 }

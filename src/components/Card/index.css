@@ -6,13 +6,58 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    gap: 1em;
-    justify-content: center;
-    align-items: center;
+    gap: .3em;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: all 0.2s linear;
+    height: 100%;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card__discount {
+    position: absolute;
+    top: .5em;
+    left: 1em;
+    background-color: #e33;
+    padding: .2em .6em;
+    border-radius: 1em;
+    color: #fff;
+    font-weight: 700;
 }
 .card__heart {
+    font-size: 1.2em;
     position: absolute;
     top: .5em;
     right: 1em;
     color: crimson;
+}
+.card img {
+    width: 100%;
+}
+.card__price {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+.red {
+    color: #e33;
+}
+.card__price-canceled {
+    text-decoration: line-through;
+    font-size: .8rem;
+    color: #222;
+}
+.card__wight {
+    font-size: .8em;
+    color: #2229;
+}
+.card button {
+    background-color: rgb(255, 228, 77);
+    padding: .5em 1em;
+    font-size: 1em;
+    font-weight: 900;
+    border: none;
+    border-radius: 1.5em;
+    padding-bottom: .7em;
+    margin-top: 1em;
 }

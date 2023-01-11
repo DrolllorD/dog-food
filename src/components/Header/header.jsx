@@ -1,15 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, {useState}from "react";
+import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import "./header.css";
 import {ReactComponent as LogoSvg} from "./img/logo.svg";
 import {ReactComponent as FavoritesSvg} from "./img/ic-favorites.svg";
 import {ReactComponent as CartSvg} from "./img/ic-cart.svg";
 import {ReactComponent as ProfileSvg} from "./img/ic-profile.svg";
+import Dropmenu from "../Dropmenu/dropmenu";
 
-export default ({user, setUser,products, setModalActive}) => {
-    // const [user, setUser] = useState(localStorage.getItem("user"));
+export default ({user, setUser, goods, searchGoods, setModalActive}) => {
+    const [drop, setDrop] = useState(false);
 
     // let user = localStorage.getItem("user");
     const logIn = (e) => {
@@ -25,19 +27,17 @@ export default ({user, setUser,products, setModalActive}) => {
         e.preventDefault();
         localStorage.removeItem("user");
         setUser("");
+        setDrop(!drop);
     }
     return <header>
-        <div className="header__content">
-            <a className="logo" href="#"><LogoSvg/></a>
-            <Search data={products}/>
-            <nav className="menu">
-                {/* <FavoritesSvg/>
-                <CartSvg/>
-                <ProfileSvg/> */}
-                {user && <a href="#">{user}</a>}
-                {!user && <a href="#" onClick={logIn}>Войти</a>}
-                {user && <a href="#" onClick={logOut}>Выйти</a>}
-            </nav>
-        </div>
+        <Link className="logo" to="/"><LogoSvg/></Link>
+        <Search data={goods} searchGoods={searchGoods}/>
+        <nav className="menu">
+            {user && <FavoritesSvg/>}
+            {user && <CartSvg/>}
+            {user && <ProfileSvg onClick={() => setDrop(!drop)}/>}
+            {!user && <ProfileSvg onClick={logIn} />}
+            {drop && <Dropmenu user={user} logOut={logOut} setDrop={setDrop} />}
+        </nav>
     </header>
 }

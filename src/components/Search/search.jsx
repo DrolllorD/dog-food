@@ -1,21 +1,26 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, {useState} from "react";
 import "./search.css";
+import { useNavigate } from "react-router-dom";
 import {ReactComponent as SearchImg} from "./img/magnifying-glass-solid.svg";
 import {ReactComponent as CloseImg} from "./img/circle-xmark-regular.svg";
 
-export default ({data}) => {
+export default ({data, searchGoods}) => {
+    const navigate = useNavigate();
     const [text, updateText] = useState("");
     const [searchData, setSearchData] = useState(data);
     const clearSearch = () => {
         updateText("");
         setSearchData(data);
+        searchGoods(data);
     }
     const search = (e) => {
+        navigate("/catalog");
         updateText(e.target.value);
         let arr = data.filter(el => el.name.toLowerCase().includes(e.target.value.toLowerCase()));
         setSearchData(arr);
         console.log(arr);
+        searchGoods(arr);
     }
     return <div className="search-block">
         <input placeholder="Поиск" value={text} onChange={search} />
