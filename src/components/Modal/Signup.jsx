@@ -35,10 +35,10 @@ export default ({change, close}) => {
                     api.signIn(body)
                         .then(res => res.json())
                         .then(data => {
-                            localStorage.setItem("user", data.data.name);
+                            localStorage.setItem("user", JSON.stringify(data.data));
                             localStorage.setItem("token8", data.token);
                             setToken(data.token);
-                            setUser(data.data.name);
+                            setUser(data.data);
                         })
                     setInp1("");
                     setInp2("");

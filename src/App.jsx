@@ -18,7 +18,11 @@ import {Api} from "./Api";
 import Ctx from "./Ctx";
 
 const App = () => {
-    const [user, setUser] = useState (localStorage.getItem("user"));
+    let usr = localStorage.getItem("user");
+    if(usr) {
+        usr = JSON.parse(usr);
+    }
+    const [user, setUser] = useState (usr);
     const [token, setToken] = useState(localStorage.getItem("token8"));
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState (new Api(token));
@@ -29,8 +33,6 @@ const App = () => {
     const [arrObjAds, setArrObjAds] = useState(ads);
 
     useEffect(() => {
-        console.log("Hello!");
-        console.log(token);
         if (token) {
             //загрузить данные с сервера
             api.getProducts()
@@ -69,7 +71,11 @@ const App = () => {
     useEffect(() => {
         console.log("Change token");
         setApi(new Api(token));
-        setUser(localStorage.getItem("user"));
+        let usr = localStorage.getItem("user");
+        if(usr) {
+            usr = JSON.parse(usr);
+        }
+        setUser(usr);
     }, [token]);
 
     useEffect(() => {
@@ -98,30 +104,35 @@ const App = () => {
         user: user,
         token: token,
         api: api,
+        modalActive: modalActive,
+        goods: goods,
+        visibleGoods: visibleGoods,
+        resize: resize,
+        arrObjAds: arrObjAds,
         setUser: setUser,
         setToken: setToken,
-        setApi: setApi
+        setApi: setApi,
+        setModalActive: setModalActive,
+        setGoods: setGoods,
+        setVisibleGoods: setVisibleGoods,
+        setResize: setResize,
+        setArrObjAds: setArrObjAds,
+        products: products
     }}>
         <div className="container">
-            <Header 
-                resize={resize}
-                // products={products} 
-                goods = {goods}
-                searchGoods = {setVisibleGoods}
-                setModalActive={setModalActive} 
-            />
+            <Header/>
             <main>
                 {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
                 <Routes>
-                    <Route path="/dog-food/" element={<Home data={products} arrObjAds={arrObjAds} resize={resize}/>} />
-                    <Route path="/dog-food/catalog" element={<Catalog data={visibleGoods} />} />
+                    <Route path="/dog-food/" element={<Home/>} />
+                    <Route path="/dog-food/catalog" element={<Catalog/>} />
                     <Route path="/dog-food/profile" element={<Profile/>} />
-                    <Route path="/dog-food/catalog/:id" element={<Product />} />
+                    <Route path="/dog-food/catalog/:id" element={<Product/>} />
                 </Routes>
             </main>
-            <Footer resize={resize} />
+            <Footer/>
         </div>
-        <Modal isActive={modalActive} setState={setModalActive} />
+        <Modal/>
     </Ctx.Provider>
 }
 

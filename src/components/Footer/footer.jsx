@@ -1,11 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, {useContext} from "react";
 import {Link} from "react-router-dom";
 import "./footer.css";
 import {ReactComponent as LogoSvg} from "./img/logo.svg";
 import {ReactComponent as LogoMinSvg} from "./img/logo_min.svg";
+import Ctx from "../../Ctx";
 
-export default ({resize}) => {
+export default () => {
+    const {resize} = useContext(Ctx);
     const year = new Date().getFullYear();
     return <footer>
         <div className="footer__copy">

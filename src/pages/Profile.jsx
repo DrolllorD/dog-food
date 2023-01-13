@@ -11,11 +11,11 @@ export default () => {
         e.preventDefault();
         setUser(null);
         localStorage.removeItem("user");
-        navigate("/");
+        navigate("/dog-food/");
     }
     return <>
         <h1>Личный кабинет</h1>
-        <p>Привет, {user}!</p>
+        <p>Привет, {user && user.name}!</p>
         <a onClick={logOut} style={{color: "orange"}}>Выйти из аккаунта</a>
     </>
 }

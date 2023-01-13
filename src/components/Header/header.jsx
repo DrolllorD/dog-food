@@ -12,8 +12,8 @@ import {ReactComponent as LogoMinSvg} from "./img/logo_min.svg";
 import Dropmenu from "../Dropmenu/dropmenu";
 import Ctx from "../../Ctx";
 
-export default ({goods, searchGoods, setModalActive, resize}) => {
-    const {user,setUser} = useContext(Ctx);
+export default () => {
+    const {user, setUser, setModalActive, resize} = useContext(Ctx);
     const [drop, setDrop] = useState(false);
 
     // let user = localStorage.getItem("user");
@@ -37,7 +37,7 @@ export default ({goods, searchGoods, setModalActive, resize}) => {
             ? <Link className="logo" to="/dog-food/"><LogoSvg/></Link>
             : <Link className="logo" to="/dog-food/"><LogoMinSvg/></Link>
         }
-        <Search data={goods} searchGoods={searchGoods}/>
+        <Search/>
         <nav className="menu">
             {user && <FavoritesSvg/>}
             {user && <CartSvg/>}
