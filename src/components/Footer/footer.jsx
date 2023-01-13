@@ -10,8 +10,8 @@ export default ({resize}) => {
     return <footer>
         <div className="footer__copy">
             {!resize && window.innerWidth > 1000
-                ? <Link className="logo" to="/"><LogoSvg/></Link>
-                : <Link className="logo" to="/"><LogoMinSvg/></Link>
+                ? <Link className="logo" to="/dog-food/"><LogoSvg/></Link>
+                : <Link className="logo" to="/dog-food/"><LogoMinSvg/></Link>
             }
             <span>©&#171;Интернет-магазин DogFood.ru&#187;</span>
         </div>

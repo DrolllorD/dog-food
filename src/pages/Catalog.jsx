@@ -13,13 +13,13 @@ export default ({data}) => {
                 <p>Всегда свежие лакомства ручной работы с доставкой по России и Миру</p>
             </div>
             <div className="cards">
-                {data && data.map((el, i) => <Link to={`/catalog/${el._id}`} key={el._id}><Card key={"card_" + i} data={el} like={(i + 1) % 2 === 0} /></Link>)}
+                {data && data.map((el, i) => <Link to={`/dog-food/catalog/${el._id}`} key={el._id}><Card key={"card_" + i} data={el} like={(i + 1) % 2 === 0} /></Link>)}
             </div>
         </>
         : <div className="empty-block">
             <EmojiFrown/>
             <p>Простите, по вашему запросу товаров не найдено</p>
-            <Link to="/" className="btn">На главную страницу</Link>
+            <Link to="/dog-food/" className="btn">На главную страницу</Link>
         </div>}
     </>
 }

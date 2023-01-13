@@ -34,8 +34,8 @@ export default ({goods, searchGoods, setModalActive, resize}) => {
     }
     return <header>
         {!resize && window.innerWidth > 1000
-            ? <Link className="logo" to="/"><LogoSvg/></Link>
-            : <Link className="logo" to="/"><LogoMinSvg/></Link>
+            ? <Link className="logo" to="/dog-food/"><LogoSvg/></Link>
+            : <Link className="logo" to="/dog-food/"><LogoMinSvg/></Link>
         }
         <Search data={goods} searchGoods={searchGoods}/>
         <nav className="menu">
