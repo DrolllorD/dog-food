@@ -1,7 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import Ctx from "../../Ctx";
 
-export default ({change, api, close, setToken}) => {
+export default ({change, close}) => {
+    const {api, setToken} = useContext(Ctx);
     const [inp1, setInp1] = useState("");
     const [inp2, setInp2] = useState("");
 

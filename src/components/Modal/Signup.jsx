@@ -1,7 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import Ctx from "../../Ctx";
 
-export default ({change, api, close, setToken}) => {
+export default ({change, close}) => {
+    const {api, setToken,setUser} = useContext(Ctx);
     const [inp1, setInp1] = useState("");
     const [inp2, setInp2] = useState("");
     const [inp3, setInp3] = useState("");
@@ -36,6 +38,7 @@ export default ({change, api, close, setToken}) => {
                             localStorage.setItem("user", data.data.name);
                             localStorage.setItem("token8", data.token);
                             setToken(data.token);
+                            setUser(data.data.name);
                         })
                     setInp1("");
                     setInp2("");

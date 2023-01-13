@@ -20,7 +20,7 @@ export default ({}) => {
                 setProduct(data);
             })
         }
-    })
+    }, [])
     return <>
         <h1>{product.name || "Страница товара"}</h1>
         <p>{id}</p>

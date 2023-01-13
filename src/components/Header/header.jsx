@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-anonymous-default-export */
-import React, {useState}from "react";
+import React, {useState, useContext}from "react";
 import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import "./header.css";
@@ -8,9 +8,12 @@ import {ReactComponent as LogoSvg} from "./img/logo.svg";
 import {ReactComponent as FavoritesSvg} from "./img/ic-favorites.svg";
 import {ReactComponent as CartSvg} from "./img/ic-cart.svg";
 import {ReactComponent as ProfileSvg} from "./img/ic-profile.svg";
+import {ReactComponent as LogoMinSvg} from "./img/logo_min.svg";
 import Dropmenu from "../Dropmenu/dropmenu";
+import Ctx from "../../Ctx";
 
-export default ({user, setUser, goods, searchGoods, setModalActive}) => {
+export default ({goods, searchGoods, setModalActive, resize}) => {
+    const {user,setUser} = useContext(Ctx);
     const [drop, setDrop] = useState(false);
 
     // let user = localStorage.getItem("user");
@@ -30,7 +33,10 @@ export default ({user, setUser, goods, searchGoods, setModalActive}) => {
         setDrop(!drop);
     }
     return <header>
-        <Link className="logo" to="/"><LogoSvg/></Link>
+        {!resize && window.innerWidth > 1000
+            ? <Link className="logo" to="/"><LogoSvg/></Link>
+            : <Link className="logo" to="/"><LogoMinSvg/></Link>
+        }
         <Search data={goods} searchGoods={searchGoods}/>
         <nav className="menu">
             {user && <FavoritesSvg/>}

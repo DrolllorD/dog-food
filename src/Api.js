@@ -23,6 +23,24 @@ class Api {
             body: JSON.stringify(body)
         });
     }
+    pasRes(body) { //отправка токена на почту
+        return fetch(`${this.path}/password-reset`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        });
+    }
+    // pasRes(body) { //изменение пароля
+    //     return fetch(`${this.path}/password-reset`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(body)
+    //     });
+    // }
     getProducts() {
         return fetch (`${this.path}/products`,{
             headers: {

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
 import "./style.css";
 import products from "./assets/data.json";
+import ads from "./assets/ads.json";
 
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer"
@@ -14,6 +15,7 @@ import Profile from "./pages/Profile.jsx";
 import Product from "./pages/Product";
 
 import {Api} from "./Api";
+import Ctx from "./Ctx";
 
 const App = () => {
     const [user, setUser] = useState (localStorage.getItem("user"));
@@ -24,7 +26,7 @@ const App = () => {
     const [goods, setGoods] = useState([]);
     const [visibleGoods, setVisibleGoods] = useState(goods);
     const arrColorSaturation = [20,40,60,80,100,120,140,160,180,200];
-    const [arrObjAds, setArrObjAds] = useState([{h2:"Микс масел", p:"пищевая здоровая натуральная добавка", img:"https://crimea-nature.com/uploads/2020/12/maslo-plus-v-ryad-size-1-1000x737-1.png"},{h2:"Наборы от 840 ₽", p:"для дрессировки", img:"https://static.insales-cdn.com/r/EOeQXbuL5TU/rs:fit:1000:0:1/plain/images/products/1/782/80397070/226x1000_lamb_round_chip.png"},{h2:"Рога северного оленя", p:"от 10 до 30 кг", img:"https://amiel.club/uploads/posts/2022-03/1647756230_35-amiel-club-p-roga-olenya-kartinki-49.png"},{h2:"Слипы из шеи индейки", p:"100% натуральное", img:"https://spar-online.ru/upload/iblock/115/qcvrilcamy1eursyjm7z498kvyo16bmy.png"}]);
+    const [arrObjAds, setArrObjAds] = useState(ads);
 
     useEffect(() => {
         console.log("Hello!");
@@ -61,8 +63,6 @@ const App = () => {
             }else{
                 setResize(false);
             }
-            console.log(e);
-            console.log(resize);
         })
     }, []);
 
@@ -94,11 +94,17 @@ const App = () => {
         setVisibleGoods(goods);
     }, [goods])
 
-    return <>
+    return <Ctx.Provider value={{
+        user: user,
+        token: token,
+        api: api,
+        setUser: setUser,
+        setToken: setToken,
+        setApi: setApi
+    }}>
         <div className="container">
             <Header 
-                user={user} 
-                setUser={setUser} 
+                resize={resize}
                 // products={products} 
                 goods = {goods}
                 searchGoods = {setVisibleGoods}
@@ -107,16 +113,16 @@ const App = () => {
             <main>
                 {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
                 <Routes>
-                    <Route path="/" element={<Home data={products} arrObjAds={arrObjAds} resize={resize}/>} />
-                    <Route path="/catalog" element={<Catalog data={visibleGoods} />} />
-                    <Route path="/profile" element={<Profile setUser={setUser} user={user} />} />
-                    <Route path="/catalog/:id" element={<Product />} />
+                    <Route path="/dog-food/" element={<Home data={products} arrObjAds={arrObjAds} resize={resize}/>} />
+                    <Route path="/dog-food/catalog" element={<Catalog data={visibleGoods} />} />
+                    <Route path="/dog-food/profile" element={<Profile/>} />
+                    <Route path="/dog-food/catalog/:id" element={<Product />} />
                 </Routes>
             </main>
-            <Footer />
+            <Footer resize={resize} />
         </div>
-        <Modal isActive={modalActive} setState={setModalActive} api={api} setToken={setToken} />
-    </>
+        <Modal isActive={modalActive} setState={setModalActive} />
+    </Ctx.Provider>
 }
 
 export default App;
