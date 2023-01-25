@@ -1,15 +1,37 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React from "react";
+import React, { useContext, useState } from "react";
+import Ctx from "../../Ctx";
 import "./index.css";
 
-export default ({data, like}) => {
+export default ({data}) => {
+    const {user, setFavourites, api, setGoods} = useContext(Ctx);
+    const [like, setLike] = useState(data.likes && data.likes.includes(user._id));
+
+    const update = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setLike(!like);
+        api.setLike(data._id, like)
+            .then(res => res.json())
+            .then(data => {
+                setFavourites(prev => {
+                    let arr = prev.filter(el => el._id === data._id);
+                    return arr.length > 0 ? prev.filter(el => el._id !== data._id) : [...prev, data];
+                })
+                // setGoods(prev => prev.map(el => el._id === data._id && like ? el.likes.push(user._id) : el.likes.filter(l => l !== user._id)));
+            })
+    }
+    
     return <div className="card">
         {data.discount !== 0 && <div className="card__discount">-{data.discount}%</div> }
-        <span className="card__heart">
+        <span className="card__heart" onClick={update}>
             {
-                like
-                ? <i className="fa-solid fa-heart"></i>
-                : <i className="fa-regular fa-heart"></i>
+                data.likes 
+                    ? like
+                        ? <i className="fa-solid fa-heart"></i>
+                        : <i className="fa-regular fa-heart"></i>
+                    : null
+                
             }
         </span>
         <img src={data.pictures} alt="Изображение товара" />
@@ -20,6 +42,6 @@ export default ({data, like}) => {
         }
         <div className="card__wight">{data.wight}</div>
         <div className="card__name">{data.name}</div>
-        <button>В корзину</button>
+        {data.likes && <button>В корзину</button>}
     </div>
 }

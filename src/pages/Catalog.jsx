@@ -4,9 +4,12 @@ import Card from "../components/Card";
 import {Link} from "react-router-dom";
 import {EmojiFrown} from "react-bootstrap-icons";
 import Ctx from "../Ctx";
+import usePagination from "../hooks/usePagination";
+import Pagination from "../components/Pagination";
 
 export default () => {
     const {user, visibleGoods} = useContext(Ctx);
+    const paginate = usePagination(visibleGoods, 12);
     return <>
         {user
             ? <>
@@ -17,8 +20,9 @@ export default () => {
                         <p>Всегда свежие лакомства ручной работы с доставкой по России и Миру</p>
                     </div>
                     <div className="cards">
-                        {visibleGoods && visibleGoods.map((el, i) => <Link to={`/dog-food/catalog/${el._id}`} key={el._id}><Card key={"card_" + i} data={el} like={(i + 1) % 2 === 0} /></Link>)}
+                        {visibleGoods && paginate.setPageData().map((el, i) => <Link to={`/dog-food/catalog/${el._id}`} key={el._id}><Card key={"card_" + i} data={el} /></Link>)}
                     </div>
+                    <Pagination hook={paginate} />
                 </>
                 : <div className="empty-block">
                     <EmojiFrown/>

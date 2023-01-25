@@ -2,11 +2,19 @@ body{
     margin: 0;
     font-family: sans-serif;
 }
+h2{
+    font-weight: 900;
+    font-size: 1.7em;
+    font-family: Tahoma;
+}
 a{
     text-decoration: none;
     color: inherit;
 }
-.container{
+.opa {
+    opacity: 0.5;
+}
+.wrapper{
     min-height: 100vh;
     display: grid;
     grid-template-rows: 150px auto 200px;
@@ -16,6 +24,7 @@ header{
 }
 main, footer{
     padding: 2em calc(50% - 500px);
+    position: relative;
 }
 .main__header{
     width: 450px;
@@ -69,6 +78,180 @@ main, footer{
     margin: 25px 0;
     gap: 2em;
 }
+.form-preview {
+    height: 108px;
+    background-size: contain;
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+.productBack {
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    opacity: 0.5;
+    margin-top: 1em;
+}
+.productName {
+    font-weight: 900;
+    margin-top: 1em;
+    font-size: 2em;
+}
+.prodRate {
+    font-size: 1.5em;
+    display: flex;
+    gap: 0.3em;
+    margin: 0.5em;
+    color: rgb(255, 228, 77);
+    stroke: #f62;
+}
+.mainProd {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.mainProd__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2em;
+}
+.mainProd__img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainProd__img img {
+    height: 80%;
+}
+.mainProd__discount {
+    position: absolute;
+    top: .5em;
+    left: 1em;
+    background-color: #e33;
+    padding: .2em .6em;
+    border-radius: 1em;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+.mainProd__price {
+    font-weight: 900;
+    font-size: 2em;
+}
+.mainProd__price-canceled {
+    text-decoration: line-through;
+    font-size: 1rem;
+    color: #222;
+}
+.mainProd_buy {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1em;
+    font-size: 2em;
+}
+.mainProd_counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #555;;
+    border-radius: 2em;
+}
+.mainProd_counter > * {
+    padding: 0 20px;
+}
+.mainProd__input {
+    border: none;
+    width: 4em;
+    height: 3rem;
+    font-size: 2rem;
+}
+.butLeft {
+    border: none;
+    border-right: 1px solid #555;
+    border-radius: 2em 0 0 2em;
+    font-family: Tahoma;
+    font-weight: 900;
+}
+.butLeft:active {
+    filter: brightness(0.9);
+}
+.butRight {
+    border: none;
+    border-left: 1px solid #555;
+    border-radius: 0 2em 2em 0;
+    font-family: Tahoma;
+    font-weight: 900;
+}
+.butRight:active {
+    filter: brightness(0.9);
+}
+.btnBasket {
+    font-size: 0.7em;
+    font-weight: 900;
+    padding: 0.5em 2em;
+    border-radius: 2em;
+    background-color: rgb(255, 228, 77);
+    border: none;
+    white-space: nowrap;
+}
+.btnBasket:active {
+    filter: brightness(0.9);
+}
+.mainProd__info {
+    display: flex;
+    gap: 1em;
+    background-color: #eee;
+    padding: 0.7em;
+    border-radius: 0.5em;
+}
+.mainProd__text h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 1em;
+}
+.prodDescription p {
+    font-weight: 700;
+}
+.prodCharacteristics {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.prodCharacteristics h2 {
+    grid-column: 1/3;
+}
+.prodCharacteristics p {
+    font-weight: 700;
+}
+.reviews {
+    display: grid;
+    gap: 2em;
+}
+.showReviews {
+    margin: 2em 2em 2em 0;
+}
+.formReview {
+    margin-bottom: 3em;
+}
+.redactProd {
+    position: absolute;
+    top:2em;
+    right: 2em;
+    display: flex;
+    gap: 1em;
+}
+.redactProd button{
+    padding-bottom: 1.8em;
+    box-sizing: border-box;
+}
+.closeEditProd {
+    padding-bottom: 1.8em;
+    position: absolute;
+    top: 2em;
+    right: 2em;
+}
 
 @media (max-width: 1260px){
     main, footer{
@@ -88,6 +271,9 @@ main, footer{
     }
     .asd-container {
         display: grid;
+        grid-template-columns: 1fr;
+    }
+    .mainProd {
         grid-template-columns: 1fr;
     }
 }

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import products from "./assets/data.json";
 import ads from "./assets/ads.json";
@@ -7,12 +8,13 @@ import ads from "./assets/ads.json";
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer"
 import Modal from "./components/Modal";
-// import Search from "./components/Search/search.jsx";
 
 import Catalog from "./pages/Catalog.jsx";
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
 import Product from "./pages/Product";
+import AddForm from "./pages/AddForm";
+import Favourites from "./pages/Favourites";
 
 import {Api} from "./Api";
 import Ctx from "./Ctx";
@@ -29,8 +31,9 @@ const App = () => {
     const [resize, setResize] = useState (false);
     const [goods, setGoods] = useState([]);
     const [visibleGoods, setVisibleGoods] = useState(goods);
-    const arrColorSaturation = [20,40,60,80,100,120,140,160,180,200];
+    const arrColorSaturation = [20,40,60,80,100,120,140];
     const [arrObjAds, setArrObjAds] = useState(ads);
+    const [favourites, setFavourites] = useState([]);
 
     useEffect(() => {
         if (token) {
@@ -38,7 +41,6 @@ const App = () => {
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     setGoods(data.products);
                 })
         }
@@ -69,7 +71,6 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        console.log("Change token");
         setApi(new Api(token));
         let usr = localStorage.getItem("user");
         if(usr) {
@@ -98,8 +99,20 @@ const App = () => {
 
     useEffect(() => {
         setVisibleGoods(goods);
+        setFavourites(goods.filter(el => {
+            el.likes.includes(user._id);
+        }))
     }, [goods])
-
+    const ending = (num) => {
+        let con = num.length.toString();
+        if ((+con[con.length - 1] === 1) && (+con[con.length - 2] !== 1)){
+            return ["", ""];
+        } else if ((+con[con.length - 1] > 1) && (+con[con.length - 1] < 5) && (+con[con.length - 2] !== 1)) {
+            return ["о", "а"];
+        } else {
+            return ["о", "ов"];
+        }
+    }
     return <Ctx.Provider value={{
         user: user,
         token: token,
@@ -109,6 +122,8 @@ const App = () => {
         visibleGoods: visibleGoods,
         resize: resize,
         arrObjAds: arrObjAds,
+        products: products,
+        favourites: favourites,
         setUser: setUser,
         setToken: setToken,
         setApi: setApi,
@@ -117,9 +132,10 @@ const App = () => {
         setVisibleGoods: setVisibleGoods,
         setResize: setResize,
         setArrObjAds: setArrObjAds,
-        products: products
+        setFavourites: setFavourites,
+        ending: ending
     }}>
-        <div className="container">
+        <div className="wrapper">
             <Header/>
             <main>
                 {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
@@ -128,6 +144,8 @@ const App = () => {
                     <Route path="/dog-food/catalog" element={<Catalog/>} />
                     <Route path="/dog-food/profile" element={<Profile/>} />
                     <Route path="/dog-food/catalog/:id" element={<Product/>} />
+                    <Route path="/dog-food/add" element={<AddForm/>} />
+                    <Route path="/dog-food/favourites" element={<Favourites/>} />
                 </Routes>
             </main>
             <Footer/>

@@ -15,7 +15,7 @@ export default () => {
     }
     return <div className="modal-container" style={style}>
         <div className="modal">
-            <div className="modal-close" onClick={() => setModalActive(false)} />
+            <div className="modal-close" onClick={() => setModalActive(false)} ><i class="fa-solid fa-xmark"></i></div>
             <h2>{auth ? "Войти" : "Зарегистрироваться"}</h2>
             {auth 
             ? <Login change={setAuth} close={setModalActive}/> 

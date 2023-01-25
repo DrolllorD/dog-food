@@ -7,7 +7,7 @@ import {ReactComponent as CloseImg} from "./img/circle-xmark-regular.svg";
 import Ctx from "../../Ctx";
 
 export default () => {
-    const {goods, setVisibleGoods} = useContext(Ctx);
+    const {goods, setVisibleGoods, ending} = useContext(Ctx);
     const navigate = useNavigate();
     const [text, updateText] = useState("");
     const [searchData, setSearchData] = useState(goods);
@@ -21,7 +21,6 @@ export default () => {
         updateText(e.target.value);
         let arr = goods.filter(el => el.name.toLowerCase().includes(e.target.value.toLowerCase()));
         setSearchData(arr);
-        console.log(arr);
         setVisibleGoods(arr);
     }
     return <div className="search-block">
@@ -29,7 +28,7 @@ export default () => {
         <button>{text ? <CloseImg onClick={clearSearch} /> : <SearchImg/>}</button>
         {text && <div className="search-result">
             По запросу <b>{text}</b>&nbsp;
-            {searchData.length > 0 ? `найдено ${searchData.length} продукт` : "не найдено ни одного продукта"}
+            {searchData.length > 0 ? `найден${ending(searchData)[0]} ${searchData.length} продукт${ending(searchData)[1]}` : "не найдено ни одного продукта"}
         </div>}
     </div>
 }

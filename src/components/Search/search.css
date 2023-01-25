@@ -17,6 +17,8 @@
     right: 20px;
     background-color: transparent;
     border: none;
+    display: flex;
+    align-items: center;
     height: 20px;
 }
 .search-block svg{

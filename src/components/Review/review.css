@@ -1,0 +1,20 @@
+.review {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background-color: silver;
+    border: 4px #555 double;
+    border-radius: 2em;
+}
+.review__img img {
+    width: 100%;
+    border-radius: 2em 0 0 2em;
+}
+.review__content {
+    padding: 1em;
+    position: relative;
+}
+.delRev {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}

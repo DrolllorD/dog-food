@@ -18,7 +18,29 @@ header {
     border-bottom-color: #fff;
 }
 .menu {
-    display: flex;
-    gap: 1.5em;
+    display: grid;
     position: relative;
+    column-gap: 2em;
+    row-gap: 1em;
+    grid-template-columns: repeat(4, 1fr);
+}
+.menu > *:not(h2) {
+    cursor: pointer;
+}
+.menu h2 {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    font-size: 1.2em;
+    user-select: none;
+}
+.badge-link {
+    position: relative;
+    width: 2em;
+}
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    font-size: 0.6em;
 }

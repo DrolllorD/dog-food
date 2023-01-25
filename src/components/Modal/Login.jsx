@@ -13,19 +13,20 @@ export default ({change, close}) => {
             email: inp1,
             password: inp2
         }
-        // console.log(body);
         api.signIn(body)
-            .then(res => res.json())
-            .then(data => {
-                //Не забыть отловить сообщение с ошибкой
-                console.log(data);
-                localStorage.setItem("user", JSON.stringify(data.data));
-                localStorage.setItem("token8", data.token);
-                setToken(data.token);
-                setInp1("");
-                setInp2("");
-                close(false);
-            })
+            .then(res => res.ok 
+                ? res.json().then(data => {
+                    localStorage.setItem("user", JSON.stringify(data.data));
+                    localStorage.setItem("token8", data.token);
+                    setToken(data.token);
+                    setInp1("");
+                    setInp2("");
+                    close(false);
+                })
+                : res.status === 401 
+                    ? alert(`Неверно указаны почта или пароль!`) 
+                    : alert(`УПС! Ошибка с кодом ${res.status}`)
+            )
     }
 
     return <form onSubmit={sendForm}>

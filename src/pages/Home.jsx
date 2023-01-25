@@ -25,7 +25,7 @@ export default () => {
             </div>
         }
         <div className="cards">
-            {products.map((el, i) => <Card key={"card_" + i} data={el} like={(i + 1) % 2 === 0} />)}
+            {products.map((el, i) => <Card key={"card_" + i} data={el} />)}
         </div>
         {!resize && window.innerWidth > 1000
             ? <div className="asd-container">

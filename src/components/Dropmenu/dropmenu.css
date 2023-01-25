@@ -1,19 +1,22 @@
 .menu__drop {
     position: absolute;
-    width: 12em;
     top: 30px;
     right: 0;
     z-index: 10;
     border-radius: 20px;
     border: #222 solid 2px;
-    background-color: #fff9;
+    background-color: #fff;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    justify-content: start;
     align-items: center;
-    font-size: 1.5em;
-    gap: 1em;
+    font-size: 1.4em;
+}
+.menu__drop > * {
+    margin: 0.2em;
+}
+.menu__drop > *:hover {
+    color: blue;
 }
 .menu__drop h2 {
     margin: 0;

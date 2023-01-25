@@ -9,7 +9,7 @@
     gap: .3em;
     justify-content: space-between;
     align-items: flex-start;
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
     height: 100%;
 }
 .card:hover {
@@ -26,14 +26,19 @@
     font-weight: 700;
 }
 .card__heart {
-    font-size: 1.2em;
+    font-size: 1.5em;
     position: absolute;
-    top: .5em;
-    right: 1em;
+    top: .2em;
+    right: 0.7em;
     color: crimson;
+    transition: all 0.1s linear;
+}
+.card__heart:hover {
+    transform: scale(1.7);
 }
 .card img {
     width: 100%;
+    margin-top: 1em;
 }
 .card__price {
     font-weight: 700;

@@ -120,7 +120,6 @@ class Api {
             },
             body: JSON.stringify(body)
             // {
-            // "available": true, // boolean
             // "pictures": "https://react-learning.ru/image-compressed/2.jpg", // string
             // "name": "Куриные желудочки для собак", // string, обязательное
             // "price": 450, // number, обязательное
@@ -140,7 +139,6 @@ class Api {
             },
             body: JSON.stringify(body)
             // {//То что необходимо изменить из списка!!!
-            // "available": true, // boolean
             // "pictures": "https://react-learning.ru/image-compressed/2.jpg", // string
             // "name": "Куриные желудочки для собак", // string, обязательное
             // "price": 450, // number, обязательное
@@ -151,7 +149,7 @@ class Api {
             // }
         })
     }
-    removeProduct(productId) { //удаление товара
+    delProduct(productId) { //удаление товара
         return fetch(`${this.path}/products/${productId}`,{
             method: "DELETE",
             headers: {
@@ -159,19 +157,9 @@ class Api {
             }
         })
     }
-    addLike(productId) { //поставить лайк
+    setLike(productId, isLike) { //поставить лайк
         return fetch(`${this.path}/products/likes/${productId}`,{
-            method: "PUT",
-            headers: {
-                "authorization": `Bearer ${this.token}`
-            }
-            // ??? body: JSON.stringify(body)
-            // {???}
-        })
-    }
-    removeLike(productId) { //удалить лайк
-        return fetch(`${this.path}/products/likes/${productId}`,{
-            method: "DELETE",
+            method: isLike ? "DELETE" : "PUT",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -193,15 +181,19 @@ class Api {
     }
     addReview(productId, body) { //оставить отзыв
         return fetch(`${this.path}/products/review/${productId}`,{
-            // method: "PUT, POST ???????",
+            method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "authorization": `Bearer ${this.token}`
             },
             body: JSON.stringify(body)
-            // {?????}
+            // {
+            //     "rating": 5,
+            //     "text": "Норм товар!"
+            // }
         })
     }
-    removeReview(productId, reviewId) { //удалить отзыв
+    delReview(productId, reviewId) { //удалить отзыв
         return fetch(`${this.path}/products/review/${productId}/${reviewId}`,{
             method: "DELETE",
             headers: {
