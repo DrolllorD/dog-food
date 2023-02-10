@@ -36,7 +36,7 @@ export default ({change, close}) => {
                         .then(res => res.json())
                         .then(data => {
                             localStorage.setItem("user", JSON.stringify(data.data));
-                            localStorage.setItem("token8", data.token);
+                            localStorage.setItem("token", data.token);
                             setToken(data.token);
                             setUser(data.data);
                         })

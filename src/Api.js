@@ -71,8 +71,8 @@ class Api {
             }
         })
     }
-    changeUserInform(body) {//изменение информации о пользователе (name, about)
-        return fetch (`${this.path}/v2/${this.group}/users/me`,{
+    updUser(body, img = false) {//изменение информации о пользователе
+        return fetch (`${this.path}/v2/${this.group}/users/me${img ? "/avatar" : ""}`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -80,18 +80,8 @@ class Api {
             },
             body: JSON.stringify(body)
             // {"name": "Василий",
-            // "about": "Писатель"}
-        })
-    }
-    changeUserAvatar(body) {//изменение аватара пользователя
-        return fetch (`${this.path}/v2/${this.group}/users/me/avatar`,{
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": `Bearer ${this.token}`
-            },
-            body: JSON.stringify(body)
-            // {"avatar": "http://........."}
+            // "about": "Писатель",
+            // "avatar": "http://........."}
         })
     }
 
@@ -157,7 +147,7 @@ class Api {
             }
         })
     }
-    setLike(productId, isLike) { //поставить лайк
+    setLike(productId, isLike) { //поставить\удалить лайк
         return fetch(`${this.path}/products/likes/${productId}`,{
             method: isLike ? "DELETE" : "PUT",
             headers: {

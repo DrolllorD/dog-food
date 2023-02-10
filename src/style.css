@@ -38,6 +38,18 @@ main, footer{
 .main__header p{
     font-size: 1.5em;
 }
+.card__filters{
+    display: flex;
+    gap: 1em;
+    margin: 2em 0;
+}
+.card__filters > * {
+    padding-bottom: 1.8em;
+}
+.btn.sort {
+    background-color: #444;
+    color: orange;
+}
 .button{
     display: inline-block;
     font-size: 1.2em;
@@ -107,6 +119,7 @@ main, footer{
 .mainProd {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1em;
 }
 .mainProd__content {
     display: flex;
@@ -122,7 +135,8 @@ main, footer{
     align-items: center;
 }
 .mainProd__img img {
-    height: 80%;
+    max-height: 400px;
+    max-width: 600px;
 }
 .mainProd__discount {
     position: absolute;
@@ -164,7 +178,6 @@ main, footer{
 }
 .mainProd__input {
     border: none;
-    width: 4em;
     height: 3rem;
     font-size: 2rem;
 }
@@ -203,9 +216,10 @@ main, footer{
 .mainProd__info {
     display: flex;
     gap: 1em;
-    background-color: #eee;
+    background-color: #ddd;
     padding: 0.7em;
     border-radius: 0.5em;
+    width: 100%;
 }
 .mainProd__text h3 {
     font-size: 1.2rem;
@@ -252,8 +266,67 @@ main, footer{
     top: 2em;
     right: 2em;
 }
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1em 0;
+}
+.profile-row svg {
+    cursor: pointer;
+    fill: silver;
+}
+.profile-row svg:hover {
+    fill: orange;
+}
+.profile-row:not(:nth-child(2n)){
+    color: grey;
+}
+.order__header {
+    font-weight: 900;
+}
+.cart {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2em;
+}
+.cartOrder {
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+.cartGoods {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.order {
+    border-radius: 1em;
+    box-shadow: 0 0 1em #777;
+    padding: 1em;
+}
+.order__price-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-weight: 900;
+}
+.btnOrderPrice {
+    width: 70%;
+    padding: 10px 0;
+    border-radius: 2em;
+    font-weight: 900;
+    background-color: rgb(240, 220, 75);
+}
+.btnOrderPrice:hover {
+    filter: brightness(1.2);
+}
+.btnOrderPrice:active {
+    transform: scale(0.95);
+}
 
-@media (max-width: 1260px){
+@media (max-width: 1200px){
     main, footer{
         padding: 0 30px;
     }
@@ -274,6 +347,9 @@ main, footer{
         grid-template-columns: 1fr;
     }
     .mainProd {
+        grid-template-columns: 1fr;
+    }
+    .cart {
         grid-template-columns: 1fr;
     }
 }

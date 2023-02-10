@@ -11,6 +11,7 @@ export default React.createContext({
     arrObjAds: [],
     products: [],
     favourites: [],
+    basket: [],
     setFavourites: () => {},
     ending: () => {},
     setArrObjAds: () => {},
@@ -20,5 +21,6 @@ export default React.createContext({
     setModalActive: () => {},
     setUser: () => {},
     setToken: () => {},
-    setApi: () => {}
+    setApi: () => {},
+    setBasket: () => {}
 });

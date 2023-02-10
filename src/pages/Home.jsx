@@ -12,7 +12,7 @@ export default () => {
         <div className="main__header">
             <h1>Крафтовые лакомства для собак</h1>
             <p>Всегда свежие лакомства ручной работы с доставкой по России и Миру</p>
-            <Link className="button" to="/dog-food/catalog">Каталог &nbsp;<i class="fa-solid fa-chevron-right"></i></Link>
+            <Link className="button" to="/dog-food/catalog">Каталог &nbsp;<i className="fa-solid fa-chevron-right"></i></Link>
         </div>
         <Promotion />
         {!resize && window.innerWidth > 1000

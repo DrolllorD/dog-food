@@ -23,12 +23,13 @@ export default () => {
         setSearchData(arr);
         setVisibleGoods(arr);
     }
+    let con = searchData.length.toString();
     return <div className="search-block">
-        <input placeholder="Поиск" value={text} onChange={search} />
+        <input placeholder="Поиск" value={text} onChange={search} maxLength="30" />
         <button>{text ? <CloseImg onClick={clearSearch} /> : <SearchImg/>}</button>
         {text && <div className="search-result">
             По запросу <b>{text}</b>&nbsp;
-            {searchData.length > 0 ? `найден${ending(searchData)[0]} ${searchData.length} продукт${ending(searchData)[1]}` : "не найдено ни одного продукта"}
+            {searchData.length > 0 ? `найден${ending(con)[0]} ${searchData.length} продукт${ending(con)[1]}` : "не найдено ни одного продукта"}
         </div>}
     </div>
 }

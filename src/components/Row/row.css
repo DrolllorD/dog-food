@@ -1,0 +1,57 @@
+.tdButtonGroup {
+    width: 170px;
+    display: flex;
+    justify-content: center;
+}
+.tdButtonGroup button {
+    padding-bottom: 1.8em;
+    display: flex;
+    justify-content: center;
+}
+.cartRow {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background-color: #eee;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.cartRow__info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.cartRow__img {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cartRow__img > * {
+    max-width: 100px;
+}
+.cartRow__name {
+    width: 250px;
+    padding: 10px;
+}
+.cartRow__price {
+    width: 130px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.cartRow__price p {
+    margin: 0;
+}
+.cartRow__button {
+    border: none;
+}
+.cartPow__secPrice {
+    font-weight: 900;
+}
+.cartPow__firPrice {
+    text-decoration: line-through;
+}

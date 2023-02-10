@@ -7,15 +7,14 @@ import {Badge} from "react-bootstrap";
 import Search from "../Search/search";
 import "./header.css";
 import {ReactComponent as LogoSvg} from "./img/logo.svg";
-import {ReactComponent as CartSvg} from "./img/ic-cart.svg";
 import {ReactComponent as ProfileSvg} from "./img/ic-profile.svg";
 import {ReactComponent as LogoMinSvg} from "./img/logo_min.svg";
 import Dropmenu from "../Dropmenu/dropmenu";
 import Ctx from "../../Ctx";
-import {PlusCircle, Heart} from "react-bootstrap-icons";
+import {PlusCircle, Heart, Cart} from "react-bootstrap-icons";
 
 export default () => {
-    const {user, setUser, setModalActive, resize, favourites} = useContext(Ctx);
+    const {user, setUser, setModalActive, resize, favourites, basket} = useContext(Ctx);
     const [drop, setDrop] = useState(false);
     const navigate = useNavigate();
 
@@ -48,7 +47,10 @@ export default () => {
                 <Heart style={{fontSize: "1.4em"}}/>
                 <Badge className="badge">{favourites.length}</Badge>
             </Link>}
-            {user && <CartSvg/>}
+            {user && <Link to={"/dog-food/basket"} className="badge-link">
+                <Cart style={{fontSize: "1.5em"}}/>
+                <Badge className="badge">{basket.reduce((acc, el) => acc + el.cnt, 0)}</Badge>
+            </Link>}
             {user && <ProfileSvg onClick={() => setDrop(!drop)}/>}
             {!user && <ProfileSvg onClick={logIn} />}
             {drop && <Dropmenu user={user} logOut={logOut} setDrop={setDrop} />}

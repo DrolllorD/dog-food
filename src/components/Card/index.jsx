@@ -1,10 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useContext, useState } from "react";
+import React, {useContext, useState} from "react";
 import Ctx from "../../Ctx";
 import "./index.css";
 
 export default ({data}) => {
-    const {user, setFavourites, api, setGoods} = useContext(Ctx);
+    const {user, setFavourites, api, setGoods, setBasket, setVisibleGoods} = useContext(Ctx);
     const [like, setLike] = useState(data.likes && data.likes.includes(user._id));
 
     const update = (e) => {
@@ -18,10 +18,41 @@ export default ({data}) => {
                     let arr = prev.filter(el => el._id === data._id);
                     return arr.length > 0 ? prev.filter(el => el._id !== data._id) : [...prev, data];
                 })
-                // setGoods(prev => prev.map(el => el._id === data._id && like ? el.likes.push(user._id) : el.likes.filter(l => l !== user._id)));
+                setGoods(prev => prev.map(el => {
+                    if (el._id === data._id) {
+                        return data;
+                    } else {
+                        return el;
+                    }
+                }))
+                setVisibleGoods(prev => prev.map(el => {
+                    if (el._id === data._id) {
+                        return data;
+                    } else {
+                        return el;
+                    }
+                }))
             })
     }
-    
+
+    const buy = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setBasket(prev => {
+            const test = prev.filter(el => el.id === data._id);
+            if (test.length) {
+                return prev.map(el => {
+                    if (el.id === data._id) {
+                        el.cnt++;
+                    }
+                    return el;
+                });
+            } else {
+                return [...prev, {id: data._id, cnt: 1}];
+            }
+        })
+    }
+
     return <div className="card">
         {data.discount !== 0 && <div className="card__discount">-{data.discount}%</div> }
         <span className="card__heart" onClick={update}>
@@ -42,6 +73,6 @@ export default ({data}) => {
         }
         <div className="card__wight">{data.wight}</div>
         <div className="card__name">{data.name}</div>
-        {data.likes && <button>В корзину</button>}
+        {data.likes && <button className="card__cart" onClick={buy}>В корзину</button>}
     </div>
 }

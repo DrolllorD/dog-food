@@ -36,11 +36,11 @@ export default () => {
                 <p>dogfood.ru@gmail.com</p>
             </div>
             <div className="footer__contact_links">
-                <a href=""><i class="fa-brands fa-telegram"></i></a>
-                <a href=""><i class="fa-brands fa-square-twitter"></i></a>
-                <a href=""><i class="fa-brands fa-square-facebook"></i></a>
-                <a href=""><i class="fa-brands fa-square-instagram"></i></a>
-                <a href=""><i class="fa-brands fa-vk"></i></a>
+                <a href=""><i className="fa-brands fa-telegram"></i></a>
+                <a href=""><i className="fa-brands fa-square-twitter"></i></a>
+                <a href=""><i className="fa-brands fa-square-facebook"></i></a>
+                <a href=""><i className="fa-brands fa-square-instagram"></i></a>
+                <a href=""><i className="fa-brands fa-vk"></i></a>
             </div>
         </div>
     </footer>

@@ -12,6 +12,7 @@
 .modal {
     height: auto;
     width: auto;
+    min-width: 20em;
     background-color: #fff;
     padding: 20px;
     border-radius: 12px;

@@ -27,7 +27,7 @@ export default ({editProd, setEditProd, product, id, setProduct}) => {
         }
     }, [])
 
-    const {api, setGoods} = useContext(Ctx);
+    const {api, setVisibleGoods} = useContext(Ctx);
     const navigate = useNavigate();
 
     const handler = (e) => {
@@ -41,7 +41,6 @@ export default ({editProd, setEditProd, product, id, setProduct}) => {
             discount: discount,
             pictures: pictures
         }
-        console.log (body);
         if(editProd){
             api.changeProduct(id, body)
             .then(res => res.json())
@@ -53,7 +52,7 @@ export default ({editProd, setEditProd, product, id, setProduct}) => {
                     api.getProducts()
                     .then(res => res.json())
                     .then(data => {
-                        setGoods(data.products);
+                        setVisibleGoods(data.products);
                     })
                 }
             })
@@ -61,15 +60,16 @@ export default ({editProd, setEditProd, product, id, setProduct}) => {
             api.addProduct(body)
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 if (!data.error) {
-                    setGoods(prev => [...prev, data]);
+                    setVisibleGoods(prev => [...prev, data]);
                     clear();
                     navigate(`/dog-food/catalog/${data._id}`);
                 }
             })
         }
     }
-    const clear =(e) => {
+    const clear =() => {
         setName("");
         setPrice(100);
         setWight("");

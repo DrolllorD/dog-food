@@ -17,17 +17,14 @@ export default () => {
     const [formReviews, setFormReviews] = useState(false);
     const [showReviews, setShowReviews] = useState(false);
     const [editProd, setEditProd] = useState(false);
-    const {api, user, setGoods, ending, setRedact} = useContext(Ctx);
+    const {api, user, setVisibleGoods, ending, setBasket} = useContext(Ctx);
     const navigate = useNavigate();
     useEffect(() => {
         api.getProduct(id)
             .then(res => res.json())
             .then(data =>{
                 setProduct(data);
-                console.log(data);
             })
-    }, [])
-    useEffect(() => {
         api.getAllUsers()
             .then(res => res.json())
             .then(data =>{
@@ -35,13 +32,12 @@ export default () => {
             })
     }, [])
     const remove = () => {
-        if(window.confirm('Удалить отзыв?')){
+        if(window.confirm('Удалить товар?')){
             api.delProduct(id)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (!data.error) {
-                    setGoods(prev => prev.filter(g => g._id !== data._id))
+                    setVisibleGoods(prev => prev.filter(g => g._id !== data._id))
                     navigate(`/dog-food/catalog`);
                 }
             })
@@ -75,17 +71,32 @@ export default () => {
         return (sum/arr.length);
     }
 
+    const buy = () => {
+        setBasket(prev => {
+            const test = prev.filter(el => el.id === id);
+            if (test.length) {
+                return prev.map(el => {
+                    if (el.id === id) {
+                        el.cnt += count;
+                    }
+                    return el;
+                });
+            } else {
+                return [...prev, {id: id, cnt: count}];
+            }
+        })
+        navigate(`/dog-food/catalog`);
+    }
+
     const handler = (e) => {
         e.preventDefault();
         let body = {
             rating: Number(ratingRev) || 3,
             text: text || "Ничего особенного"
         }
-        console.log(body);
         api.addReview(id, body)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (!data.error) {
                     setProduct(data);
                     clear();
@@ -102,7 +113,7 @@ export default () => {
         {editProd 
         ? <Redact editProd={editProd} setEditProd={setEditProd} product={product} id={id} setProduct={setProduct} />
         : <>
-            <Link to="/dog-food/catalog" className="productBack"><ChevronLeft style={{fontSize: "0.8em"}}/>Назад</Link>
+            <Link to="/dog-food/catalog" className="productBack"><ChevronLeft style={{fontSize: "0.8em"}}/>В каталог</Link>
             {product && product.author && product.author._id === user._id && <div className="redactProd">
                 <button onClick={setEditProd} className="btn"><Pencil/>  Редактировать</button>
                 <button onClick={remove} className="btn"><Trash3/>  Удалить</button>
@@ -121,17 +132,17 @@ export default () => {
                 </div>
                 <div className="mainProd__content">
                     {
-                        product.discount !== 0 
+                        product.discount && product.discount !== 0
                         ? <div className="mainProd__price red"><div className="mainProd__price-canceled">{product.price} &#8381;</div>{(product.price/100*(100 - product.discount)).toFixed()} &#8381;</div>
                         : <div className="mainProd__price">{product.price} &#8381;</div> 
                     }
                     <div className="mainProd_buy">
                         <div className="mainProd_counter">
                             <button className="butLeft" disabled={count === 0} onClick={() => setCount(Math.max (count - 1, 0))}>-</button>
-                            <input className="mainProd__input" maxLength="5" type="text" value={count} onChange={(e) => setCount(Number(e.target.value))} />
+                            <input className="mainProd__input" type="text" maxLength={10} value={count} style={{width: `${58 + (count.toString().length - 1) * 18}px`}} onChange={(e) => setCount(Number(e.target.value))} />
                             <button className="butRight" onClick={() => setCount(count + 1)}>+</button>
                         </div>
-                        <button className="btnBasket">В корзину</button>
+                        <button className="btnBasket" onClick={buy}>В корзину</button>
                     </div>
                     <div className="mainProd__info">
                         <div className="mainProd__icon"><Truck style={{fontSize: "3em", opacity: "0.5"}}/></div>
@@ -170,7 +181,7 @@ export default () => {
                     <Form onSubmit={handler}>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Label>Оцените товар :</Form.Label>
-                            <Form.Check inline type="radio" id = "r1" name="group1" label="1" value={1} onChange={(e) => setRatingRev(e.target.value)} />
+                            <Form.Check inline required type="radio" id = "r1" name="group1" label="1" value={1} onChange={(e) => setRatingRev(e.target.value)} />
                             <Form.Check inline type="radio" id = "r2" name="group1" label="2" value={2} onChange={(e) => setRatingRev(e.target.value)} />
                             <Form.Check inline type="radio" id = "r3" name="group1" label="3" value={3} onChange={(e) => setRatingRev(e.target.value)} />
                             <Form.Check inline type="radio" id = "r4" name="group1" label="4" value={4} onChange={(e) => setRatingRev(e.target.value)}/>
@@ -186,7 +197,7 @@ export default () => {
                     </Form>
                 </div>}
                 <div className="reviews">
-                    {showReviews && product.reviews && product.reviews.length > 0 && groupUsers.length > 0 && product.reviews.map((el, i) => <Review {...el} groupUsers={groupUsers} setProduct={setProduct} setRating = {setRating} key={i} />)}
+                    {showReviews && product.reviews && product.reviews.length > 0 && groupUsers.length > 0 && product.reviews.map((el, i) => <Review {...el} groupUsers={groupUsers} setProduct={setProduct} setRating = {setRating} key={`rev_${i}`} />)}
                 </div>
             </div>
         </>}

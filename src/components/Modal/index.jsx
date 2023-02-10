@@ -11,11 +11,10 @@ export default () => {
     const [auth, setAuth] = useState(true);
     let style = {
         display: modalActive && "flex"
-        // display: isActive ? "flex" : "none"
     }
     return <div className="modal-container" style={style}>
         <div className="modal">
-            <div className="modal-close" onClick={() => setModalActive(false)} ><i class="fa-solid fa-xmark"></i></div>
+            <div className="modal-close" onClick={() => setModalActive(false)} ><i className="fa-solid fa-xmark"></i></div>
             <h2>{auth ? "Войти" : "Зарегистрироваться"}</h2>
             {auth 
             ? <Login change={setAuth} close={setModalActive}/> 

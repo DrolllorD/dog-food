@@ -15,6 +15,8 @@ import Profile from "./pages/Profile.jsx";
 import Product from "./pages/Product";
 import AddForm from "./pages/AddForm";
 import Favourites from "./pages/Favourites";
+import Basket from "./pages/Basket";
+// import Fake from "./pages/Fake";
 
 import {Api} from "./Api";
 import Ctx from "./Ctx";
@@ -25,7 +27,7 @@ const App = () => {
         usr = JSON.parse(usr);
     }
     const [user, setUser] = useState (usr);
-    const [token, setToken] = useState(localStorage.getItem("token8"));
+    const [token, setToken] = useState(localStorage.getItem("token"));
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState (new Api(token));
     const [resize, setResize] = useState (false);
@@ -34,6 +36,8 @@ const App = () => {
     const arrColorSaturation = [20,40,60,80,100,120,140];
     const [arrObjAds, setArrObjAds] = useState(ads);
     const [favourites, setFavourites] = useState([]);
+    const [basket, setBasket] = useState(localStorage.getItem("basket") ? JSON.parse(localStorage.getItem("basket")) : [] );
+    // const smiles = ["O_o", "-_-", "@_@", "^_0", "=)", "^_^"]
 
     useEffect(() => {
         if (token) {
@@ -81,7 +85,8 @@ const App = () => {
 
     useEffect(() => {
         if(!user) {
-            localStorage.removeItem("token8");
+            localStorage.removeItem("token");
+            setBasket([]);
             setToken(null);
         }
     }, [user])
@@ -92,19 +97,23 @@ const App = () => {
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
+                    setVisibleGoods(data.products);
                     setGoods(data.products);
                 })
         }
     }, [api])
 
     useEffect(() => {
-        setVisibleGoods(goods);
         setFavourites(goods.filter(el => {
-            el.likes.includes(user._id);
+            return el.likes && el.likes.includes(user._id);
         }))
     }, [goods])
-    const ending = (num) => {
-        let con = num.length.toString();
+
+    useEffect(() => {
+        localStorage.setItem("basket", JSON.stringify(basket));
+    }, [basket]);
+
+    const ending = (con) => {
         if ((+con[con.length - 1] === 1) && (+con[con.length - 2] !== 1)){
             return ["", ""];
         } else if ((+con[con.length - 1] > 1) && (+con[con.length - 1] < 5) && (+con[con.length - 2] !== 1)) {
@@ -124,6 +133,7 @@ const App = () => {
         arrObjAds: arrObjAds,
         products: products,
         favourites: favourites,
+        basket,
         setUser: setUser,
         setToken: setToken,
         setApi: setApi,
@@ -133,7 +143,8 @@ const App = () => {
         setResize: setResize,
         setArrObjAds: setArrObjAds,
         setFavourites: setFavourites,
-        ending: ending
+        ending: ending,
+        setBasket
     }}>
         <div className="wrapper">
             <Header/>
@@ -146,7 +157,12 @@ const App = () => {
                     <Route path="/dog-food/catalog/:id" element={<Product/>} />
                     <Route path="/dog-food/add" element={<AddForm/>} />
                     <Route path="/dog-food/favourites" element={<Favourites/>} />
+                    <Route path="/dog-food/basket" element={<Basket/>} />
+                    {/* <Route path="/dog-food/fake/:n/:title" element={<Fake/>}/> */}
                 </Routes>
+                {/* <ul>
+                    {smiles.map((el, i) => <li key={i}><Link to={`/dog-food/fake/${i+1}/${el}`} >{el}</Link></li>)}
+                </ul> */}
             </main>
             <Footer/>
         </div>
