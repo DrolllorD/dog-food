@@ -139,7 +139,7 @@ export default () => {
                     <div className="mainProd_buy">
                         <div className="mainProd_counter">
                             <button className="butLeft" disabled={count === 0} onClick={() => setCount(Math.max (count - 1, 0))}>-</button>
-                            <input className="mainProd__input" type="text" maxLength={10} value={count} style={{width: `${58 + (count.toString().length - 1) * 18}px`}} onChange={(e) => setCount(Number(e.target.value))} />
+                            <input className="mainProd__input" type="text" maxLength={10} value={count} style={{width: `${58 + (count.toString().length - 1) * 18}px`}} onChange={(e) => !isNaN(+e.target.value) && setCount(Number(e.target.value))} />
                             <button className="butRight" onClick={() => setCount(count + 1)}>+</button>
                         </div>
                         <button className="btnBasket" onClick={buy}>В корзину</button>

@@ -12,7 +12,6 @@ export default ({author, product, _id, rating, created_at, setRating, text, grou
             api.delReview(product, _id)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (!data.error) {
                     setProduct(data);
                 }
